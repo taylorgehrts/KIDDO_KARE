@@ -1,11 +1,11 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-const User = require('./User');
+const ParentInfo = require('./ParentInfo');
 
-class ParentInfo extends Model {}
+class ChildInfo extends Model {}
 
-ParentInfo.init({
+ChildInfo.init({
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -13,21 +13,15 @@ ParentInfo.init({
         autoIncrement: true,
         unique: true
     },
-    numberOfKids: {
-        type: DataTypes.INTEGER
-    },
-    userId: {
+    age: {
         type: DataTypes.INTEGER,
-        references: {
-            model: User,
-            key: 'id'
-        }
+        allowNull: false
     }
 },
 {
     sequelize,
     freezeTableName: true,
-    modelName: 'ParentInfo'
+    modelName: 'ChildInfo'
 });
 
-module.exports = ParentInfo;
+module.exports = ChildInfo;

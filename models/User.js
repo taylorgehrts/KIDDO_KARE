@@ -34,8 +34,8 @@ User.init({
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
-        async set(value) {
-            this.setDataValue('password', await bcrypt.hash(value, 10));
+        set(value) {
+            this.setDataValue('password', bcrypt.hashSync(value, 10));
         }
     },
     phoneNumber: {
@@ -53,20 +53,6 @@ User.init({
     // isSitter: {
     //     type: DataTypes.BOOLEAN
     // },
-    sitterInfoId: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'SitterInfo',
-            key: 'id'
-        }
-    },
-    parentInfoId: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'ParentInfo',
-            key: 'id'
-        }
-    }
 }, 
 {
     sequelize,

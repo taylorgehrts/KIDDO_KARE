@@ -1,6 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
+const ParentInfo = require('./ParentInfo');
+const SitterInfo = require('./SitterInfo');
+
 class Job extends Model {}
 
 Job.init({
@@ -11,20 +14,18 @@ Job.init({
         autoIncrement: true,
         unique: true
     },
-    parentId: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'ParentInfo',
-            key: 'id'
-        }
+    startTime: {
+        type: DataTypes.DATE,
+        allowNull: false
     },
-    sitterId: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'SitterInfo',
-            key: 'id'
-        }
+    endTime: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    description: {
+        type: DataTypes.TEXT
     }
+    
 },
 {
     sequelize,

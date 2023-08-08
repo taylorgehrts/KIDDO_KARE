@@ -1,6 +1,8 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
+const User = require('./User');
+
 class SitterInfo extends Model {}
 
 SitterInfo.init({
@@ -10,6 +12,13 @@ SitterInfo.init({
         primaryKey: true,
         autoIncrement: true,
         unique: true
+    },
+    userId: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: User,
+            key: 'id'
+        }
     }
 },
 {
