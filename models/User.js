@@ -3,7 +3,11 @@ const bcrypt = require('bcrypt');
 
 const sequelize = require('../config/connection');
 
-class User extends Model {}
+class User extends Model {
+    comparePasswordHash(clearTextPassword) {
+        return bcrypt.compareSync(clearTextPassword, this.getDataValue('password'));
+    }
+}
 
 User.init({
     id: {
@@ -30,8 +34,8 @@ User.init({
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
-        set(value) {
-            this.setDataValue('password', bcrypt.hash(value, 10));
+        async set(value) {
+            this.setDataValue('password', await bcrypt.hash(value, 10));
         }
     },
     phoneNumber: {
@@ -45,9 +49,10 @@ User.init({
     address: {
         type: DataTypes.STRING
     },
-    isSitter: {
-        type: DataTypes.BOOLEAN
-    },
+    // test if we need this
+    // isSitter: {
+    //     type: DataTypes.BOOLEAN
+    // },
     sitterInfoId: {
         type: DataTypes.INTEGER,
         references: {
@@ -68,3 +73,5 @@ User.init({
     freezeTableName: true,
     modelName: 'User'
 });
+
+module.exports = User;
