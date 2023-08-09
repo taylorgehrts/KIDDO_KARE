@@ -13,9 +13,6 @@ ParentInfo.init({
         autoIncrement: true,
         unique: true
     },
-    numberOfKids: {
-        type: DataTypes.INTEGER
-    },
     userId: {
         type: DataTypes.INTEGER,
         references: {
