@@ -10,8 +10,8 @@ ParentInfo.belongsTo(User, { foreignKey: 'userId' });
 User.hasOne(SitterInfo, { foreignKey: 'userId' });
 SitterInfo.belongsTo(User, { foreignKey: 'userId' });
 
-// ParentInfo.hasMany(Job, { foreignKey: 'parentId' });
-// Job.belongsTo(ParentInfo, { foreignKey: 'parentId' });
+ParentInfo.hasMany(Job, { foreignKey: 'parentId' });
+Job.belongsTo(ParentInfo, { foreignKey: 'parentId' });
 
 // Job.hasOne(SitterInfo, { foreignKey: 'workerId' });
 // SitterInfo.belongsTo(Job, { foreignKey: 'workerId' });

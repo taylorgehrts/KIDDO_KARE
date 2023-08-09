@@ -24,8 +24,14 @@ Job.init({
     },
     description: {
         type: DataTypes.TEXT
+    },
+    parentId: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: ParentInfo,
+            key: 'id'
+        }
     }
-    
 },
 {
     sequelize,
