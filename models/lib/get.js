@@ -1,6 +1,5 @@
-const ChildInfo = require('../ChildInfo');
-const ParentInfo = require('../ParentInfo');
 const User = require('../User');
+const Job = require('../Job');
 
 const getChildren = async userId =>  await (
     await (
@@ -14,6 +13,12 @@ const getJobsInterestedIn = async userId => await (
     ).getSitterInfo()
 ).getJobsInterestedIn();
 
+const getInterestedSitters = async jobId => Promise.all((await (
+    await (
+        await Job.findByPk(jobId)
+    ).getInterestedSitters())
+).map(async sitter => await sitter.getUser()));
+
 module.exports = {
-    getChildren, getJobsInterestedIn
+    getChildren, getJobsInterestedIn, getInterestedSitters
 }
