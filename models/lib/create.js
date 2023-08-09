@@ -23,20 +23,18 @@ const createUser = async (userData, isSitter, sitterOrParentData, childData = nu
     return result;
 };
 
+const convertJobDatesStore = job => {
+    const newData = Object.create(job);
+
+    newData.startTime = job.startTime.toISOString();
+    newData.endTime = job.endTime.toISOString();
+
+    return newData;
+}
+
 const createJob = async (jobData) => {
-    return Array.isArray(jobData) ? await Job.bulkCreate(jobData.map(job => ({
-        startTime: job.startTime.toISOString(),
-        endTime: job.endTime.toISOString(),
-        description: job.description,
-        parentId: job.parentId,
-        workerId: job.workerId
-    }))) : await Job.create({
-        startTime: jobData.startTime.toISOString(),
-        endTime: jobData.startTime.toISOString(),
-        description: jobData.description,
-        parentId: jobData.parentId,
-        workerId: jobData.workerId
-    });
+    return Array.isArray(jobData) ? await Job.bulkCreate(jobData.map(job => convertJobDatesStore(job))) 
+    : await Job.create(convertJobDatesStore(jobData));
 };
 
 module.exports = {
