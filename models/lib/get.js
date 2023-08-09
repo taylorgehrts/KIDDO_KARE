@@ -8,6 +8,12 @@ const getChildren = async userId =>  await (
     ).getParentInfo()
 ).getChildInfos();
 
+const getJobsInterestedIn = async userId => await (
+    await (
+        await User.findByPk(userId)
+    ).getSitterInfo()
+).getJobsInterestedIn();
+
 module.exports = {
-    getChildren
+    getChildren, getJobsInterestedIn
 }
