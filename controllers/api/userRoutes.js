@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
             qualifications: data.qualifications
         }
     } else {
-        // TODO serialize parent data
+        // TODO decide what goes in ParentInfo (if anything) and serialize it here
         sitterOrParentData = {};
 
         childData = data.childData;
@@ -34,7 +34,12 @@ router.post('/', async (req, res) => {
     try {
         const result = await createUser(userData, isSitter, sitterOrParentData, childData);
 
-        res.status(200).json(result);
+        req.session.save(() => {
+            req.session.userId = result.user.id;
+            req.session.loggedIn = true;
+
+            res.status(200).json({ message: 'POST /api/user successful! Logged in!', data: result});
+        });
     } catch (err) {
         res.status(500).json(err);
     }
