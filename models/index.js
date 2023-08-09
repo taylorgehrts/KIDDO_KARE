@@ -3,6 +3,7 @@ const ParentInfo = require('./ParentInfo');
 const SitterInfo = require('./SitterInfo');
 const ChildInfo = require('./ChildInfo')
 const Job = require('./Job');
+const SitterInterests = require('./SitterInterests');
 
 User.hasOne(ParentInfo, { foreignKey: 'userId' });
 ParentInfo.belongsTo(User, { foreignKey: 'userId' });
@@ -19,7 +20,18 @@ Job.belongsTo(SitterInfo, { foreignKey: 'workerId' });
 ParentInfo.hasMany(ChildInfo, { foreignKey: 'parentId' });
 ChildInfo.belongsTo(ParentInfo, { foreignKey: 'parentId' });
 
+SitterInfo.belongsToMany(Job, { 
+    through: SitterInterests, 
+    foreignKey: 'sitterId', 
+    as: 'jobsInterestedIn'
+});
+Job.belongsToMany(SitterInfo, { 
+    through: SitterInterests, 
+    foreignKey: 'jobId',
+    as: 'interestedSitters'
+ });
+
 module.exports = {
     User, ParentInfo, SitterInfo, ChildInfo,
-    Job
+    Job, SitterInterests
 }
