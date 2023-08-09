@@ -7,6 +7,10 @@ class User extends Model {
     comparePasswordHash(clearTextPassword) {
         return bcrypt.compareSync(clearTextPassword, this.getDataValue('password'));
     }
+
+    getFullName() {
+        return `${this.getDataValue('firstName')} ${this.getDataValue('lastName')}`;
+    }
 }
 
 User.init({
@@ -37,6 +41,12 @@ User.init({
         set(value) {
             this.setDataValue('password', bcrypt.hashSync(value, 10));
         }
+    },
+    firstName: {
+        type: DataTypes.STRING,
+    },
+    lastName: {
+        type: DataTypes.STRING
     },
     phoneNumber: {
         type: DataTypes.STRING,
