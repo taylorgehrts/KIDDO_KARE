@@ -31,6 +31,13 @@ Job.init({
             model: ParentInfo,
             key: 'id'
         }
+    },
+    workerId: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: SitterInfo,
+            key: 'id'
+        }
     }
 },
 {
