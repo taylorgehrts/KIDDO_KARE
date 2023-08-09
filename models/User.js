@@ -59,6 +59,9 @@ User.init({
     address: {
         type: DataTypes.STRING
     },
+    bio: {
+        type: DataTypes.TEXT
+    }
     // test if we need this
     // isSitter: {
     //     type: DataTypes.BOOLEAN

@@ -6,17 +6,26 @@ const SitterInterests = require('../SitterInterests');
 const User = require('../User');
 
 const createUser = async (userData, isSitter, sitterOrParentData, childData = null) => {
-    const userId = (await User.create(userData)).id;
-    let result;
+    const userResult = await User.create(userData);
+    const userId = userResult.id;
+    let result = {};
 
     if (isSitter) {
-        result = await SitterInfo.create({ userId: userId, ...sitterOrParentData });
+        let sitterResult = await SitterInfo.create({ userId: userId, ...sitterOrParentData });
+        result = {user: {...userResult.toJSON()}, sitterInfo: {...sitterResult.toJSON()}};
     } else {
-        const parentId = (await ParentInfo.create({ userId: userId, ...sitterOrParentData })).id;
+        const parentResult = await ParentInfo.create({ userId: userId, ...sitterOrParentData });
+        const parentId = parentResult.id;
         if (Array.isArray(childData)) {
-            result = await ChildInfo.bulkCreate(childData.map(child => ({ ...child, parentId: parentId})));
+            let childrenResult = await ChildInfo.bulkCreate(childData.map(child => ({ ...child, parentId: parentId})));
+            result = {user: {...userResult.toJSON()},
+                      parentInfo: {...parentResult.toJSON()}, 
+                      children: childrenResult.map(child => child.toJSON())}
         } else {
-            result = await ChildInfo.create({ parentId, ...childData });
+            const childResult = await ChildInfo.create({ parentId, ...childData });
+            result = {user: {...userResult.toJSON()}, 
+                      parentInfo: {...parentResult.toJSON()}, 
+                      child: {...childResult.toJSON()}};
         }
     }
 
