@@ -16,6 +16,13 @@ ChildInfo.init({
     age: {
         type: DataTypes.INTEGER,
         allowNull: false
+    },
+    parentId: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: ParentInfo,
+            key: 'id'
+        }
     }
 },
 {

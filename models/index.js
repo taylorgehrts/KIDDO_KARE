@@ -16,8 +16,8 @@ Job.belongsTo(ParentInfo, { foreignKey: 'parentId' });
 // Job.hasOne(SitterInfo, { foreignKey: 'workerId' });
 // SitterInfo.belongsTo(Job, { foreignKey: 'workerId' });
 
-// ParentInfo.hasMany(ChildInfo, { foreignKey: 'parentId' });
-// ChildInfo.belongsTo(ParentInfo, { foreignKey: 'parentId' });
+ParentInfo.hasMany(ChildInfo, { foreignKey: 'parentId' });
+ChildInfo.belongsTo(ParentInfo, { foreignKey: 'parentId' });
 
 module.exports = {
     User, ParentInfo, SitterInfo, ChildInfo,
