@@ -1,23 +1,31 @@
 const User = require('../User');
 const Job = require('../Job');
 
-const getChildren = async userId =>  await (
-    await (
-        await User.findByPk(userId)
-    ).getParentInfo()
-).getChildInfos();
+// TODO map all of these to json
 
-const getJobsInterestedIn = async userId => await (
-    await (
-        await User.findByPk(userId)
-    ).getSitterInfo()
-).getJobsInterestedIn();
+const getChildren = async userId => {
+    const user = await User.findByPk(userId);
+    const parent = await user.getParentInfo();
+    const children = await parent.getChildInfos();
 
-const getInterestedSitters = async jobId => Promise.all((await (
-    await (
-        await Job.findByPk(jobId)
-    ).getInterestedSitters())
-).map(async sitter => await sitter.getUser()));
+    return children.map(child => child.toJson());
+};
+
+const getJobsInterestedIn = async userId => {
+    const user = await User.findByPk(userId);
+    const sitter = await user.getSitterInfo();
+    const jobs = await sitter.getJobsInterestedIn();
+
+    return jobs.map(job => job.toJson());
+};
+
+const getInterestedSitters = async jobId => {
+    const job = Job.findByPk(jobId);
+    const sitters = job.getInterestedSitters();
+    const users = Promise.all(sitters.map(async sitter => await sitter.getUser()));
+
+    return users.map(user => user.toJson());
+}
 
 const getChildrenInJob = async jobId => await (await Job.findByPk(jobId)).getChildInfos();
 
