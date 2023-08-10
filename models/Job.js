@@ -25,6 +25,9 @@ Job.init({
     description: {
         type: DataTypes.TEXT
     },
+    requiresCooking: {
+        type: DataTypes.BOOLEAN
+    },
     parentId: {
         type: DataTypes.INTEGER,
         references: {
