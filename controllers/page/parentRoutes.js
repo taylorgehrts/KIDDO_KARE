@@ -10,7 +10,11 @@ router.get('/:id', async (req, res) => {
     const jobs = parent.getJobs();
     const children = await getChildren(userId);
 
-    res.render('parent', { user, parent, jobs, children });
+    res.render('parent', { user: user.toJSON(),
+         parent: parent.toJSON(), 
+         jobs: jobs.map(job => job.toJSON()), 
+         children: children.map(child => child.toJSON()) 
+        });
 });
 
 module.exports = router;
