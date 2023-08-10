@@ -19,6 +19,8 @@ const getInterestedSitters = async jobId => Promise.all((await (
     ).getInterestedSitters())
 ).map(async sitter => await sitter.getUser()));
 
+const getChildrenInJob = async jobId => await (await Job.findByPk(jobId)).getChildInfos();
+
 module.exports = {
-    getChildren, getJobsInterestedIn, getInterestedSitters
+    getChildren, getJobsInterestedIn, getInterestedSitters, getChildrenInJob
 }
