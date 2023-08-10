@@ -7,6 +7,7 @@ const Op = sequelize.Op
 router.get('/', async (req, res) => {
     const filters = req.query;
     let options = { where: {}, include: User};
+    let result;
 
     if (filters.yearsExperience) {
         options.where.yearsExperience = { [Op.gte]: filters.yearsExperience };
@@ -21,7 +22,7 @@ router.get('/', async (req, res) => {
 
     try {
         const sitters = await SitterInfo.findAll(options)
-        const result = sitters.map(sitter => sitter.toJSON());
+        result = sitters.map(sitter => sitter.toJSON());
     } catch (err) {
         res.status(500).json(err);
     }
