@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('sequelize');
-const { Op } = require('sequelize');
+const Op = sequelize.Op;
 
 const { Job, ParentInfo, User } = require('../../models');
 
