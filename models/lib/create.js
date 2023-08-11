@@ -42,6 +42,14 @@ const createJob = async (jobData) => {
         : await Job.create(convertJobDatesStore(jobData));
 };
 
+const interestSitter = async (userId, jobId) => {
+    SitterInterests.create({
+        sitterId: (await (await User.findByPk(userId)).getSitterInfo()).id,
+        jobId: jobId
+    });
+}
+
 module.exports = {
-    createUser, createJob
+    createUser, createJob,
+    interestSitter
 }
