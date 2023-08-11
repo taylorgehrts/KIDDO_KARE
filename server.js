@@ -17,7 +17,14 @@ app.use(express.urlencoded({ extended: true }));
 //serve static public files
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(routes);
+//create helpers
+const hbs = exphbs.create({ helpers });
+
+// set the rendering engine
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+
+
 
 // set up sessions
 const sess = {
@@ -34,11 +41,9 @@ const sess = {
 
 //use sessions
 app.use(session(sess));
-//create helpers
-const hbs = exphbs.create({ helpers });
-// set the rendering engine
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
+
+
+app.use(routes);
 
 
 // Sync sequelize models to the database, then turn on the server 
