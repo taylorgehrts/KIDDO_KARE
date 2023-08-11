@@ -6,7 +6,9 @@ const jobRoutes = require('./jobRoutes');
 const parentRoutes = require('./parentRoutes');
 const sitterRoutes = require('./sitterRoutes');
 const searchRoutes = require('./searchRoutes')
+const homeRoutes = require('./homeRoutes');
 
+router.use('/', homeRoutes);
 router.use('/login', loginRoutes);
 router.use('/jobs', jobsRoutes);
 router.use('/job', jobRoutes);
