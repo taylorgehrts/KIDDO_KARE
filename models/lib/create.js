@@ -43,13 +43,19 @@ const createJob = async (jobData) => {
 };
 
 const interestSitter = async (userId, jobId) => {
-    SitterInterests.create({
+    return await SitterInterests.create({
         sitterId: (await (await User.findByPk(userId)).getSitterInfo()).id,
         jobId: jobId
     });
-}
+};
+
+const addChild = async (userId, childData) => {
+    const parentId = (await (await User.findByPk(userId)).getParentInfo()).id;
+
+    return await ChildInfo.create({...childData, parentId});
+};
 
 module.exports = {
     createUser, createJob,
-    interestSitter
+    interestSitter, addChild
 }

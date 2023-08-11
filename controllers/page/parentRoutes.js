@@ -14,7 +14,11 @@ router.get('/:id', async (req, res) => {
          user: user.toJSON(),
          parent: parent.toJSON(), 
          jobs: jobs.map(job => job.toJSON()), 
-         children 
+         children,
+         loggedIn: req.session.loggedIn,
+         isSitter: req.session.isSitter,
+         ownProfile: userId == req.session.userId,
+         userId
         });
 });
 
