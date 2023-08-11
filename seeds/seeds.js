@@ -1,3 +1,5 @@
+const { createJob, createUser } = require('../models/lib/create');
+
 const seedData = [
     {
         userData: {
@@ -24,6 +26,11 @@ const seedData = [
                 endTime: new Date('2023-08-07T12:00:00Z'),
                 
             },
+            {
+                description: "test1",
+                startTime: new Date('2023-08-11'),
+                endTime: new Date('2023-08-12')
+            }
         ],
     },
     {
@@ -72,11 +79,7 @@ const seedAll = async () => {
 
             if (jobData && jobData.length > 0) {
                 let jobs;
-                if (isSitter) {
-                    jobs = await createJob(jobData, null, userResult.userId); // Use userId for workerId
-                } else {
-                    jobs = await createJob(jobData, userResult.userId, null); // Use userId for parentId
-                }
+                jobs = await createJob(jobData); 
                 userResult.jobs = jobs.map(job => job.toJSON());
             }
 
@@ -87,4 +90,4 @@ const seedAll = async () => {
     }
 };
 
-seedAll();
+module.exports = seedAll;

@@ -4,6 +4,7 @@ const ParentInfo = require('../ParentInfo');
 const SitterInfo = require('../SitterInfo');
 const SitterInterests = require('../SitterInterests');
 const User = require('../User');
+const { convertJobDatesStore } = require('../../utils/utils');
 
 const createUser = async (userData, isSitter, sitterOrParentData, childData = null) => {
     const userResult = await User.create(userData);
@@ -35,15 +36,6 @@ const createUser = async (userData, isSitter, sitterOrParentData, childData = nu
 
     return result;
 };
-
-const convertJobDatesStore = job => {
-    const newData = Object.create(job);
-
-    newData.startTime = job.startTime.toISOString();
-    newData.endTime = job.endTime.toISOString();
-
-    return newData;
-}
 
 const createJob = async (jobData) => {
     return Array.isArray(jobData) ? await Job.bulkCreate(jobData.map(job => convertJobDatesStore(job)))

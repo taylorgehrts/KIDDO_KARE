@@ -2,6 +2,7 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
 const ParentInfo = require('./ParentInfo');
+const Job = require('./Job');
 
 class ChildInfo extends Model {
     getFullName() {
@@ -31,6 +32,13 @@ ChildInfo.init({
         type: DataTypes.INTEGER,
         references: {
             model: ParentInfo,
+            key: 'id'
+        }
+    },
+    jobId: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: Job,
             key: 'id'
         }
     }
