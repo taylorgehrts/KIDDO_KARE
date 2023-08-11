@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
     let options = { where: {}, include: { model: ParentInfo, include: User } };
     
     // Exclude jobs that have already started
-    options.where.startDate =  { [Op.gte]: sequelize.fn('CURRDATE') };
+    options.where.startTime =  { [Op.gte]: sequelize.fn('CURDATE') };
 
     // Apply start and end filters if they are present in the query string
     if (filters.from && filters.to) {
@@ -22,8 +22,8 @@ router.get('/', async (req, res) => {
 
         // Apply the date filters to the options object
         options.where[Op.and] = [
-            { startDate: { [Op.between]: [from, to] } }, 
-            { endDate: { [Op.between]: [from, to] } }
+            { startTime: { [Op.between]: [from, to] } }, 
+            { endTime: { [Op.between]: [from, to] } }
         ];
     }
 

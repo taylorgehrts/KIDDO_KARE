@@ -15,7 +15,8 @@ router.get('/', async (req, res) => {
 
     if (filters.qualifications) {
         options.where[Op.or] = [];
-        filters.qualifications.forEach(qualification => {
+        qualifications = filters.qualifications.split(',');
+        qualifications.forEach(qualification => {
             options.where[Op.or].push({ qualifications: sequelize.where(sequelize.fn('LOWER', sequelize.col('qualifications')), 'LIKE', '%' + qualification + '%')  })
         });
     }
