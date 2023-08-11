@@ -8,7 +8,10 @@ router.get('/', auth, async (req, res) => {
     let user;
 
     try {
-        user = await User.findByPk(userId);
+        user = await User.findByPk(userId, { attributes:
+        {
+            exclude: ['password']
+        } });
     } catch (err) {
         res.statusCode(500).json(err);
     }
