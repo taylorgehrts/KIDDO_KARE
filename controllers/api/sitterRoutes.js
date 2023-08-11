@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
     }
 
     try {
-        const sitters = await SitterInfo.findAll(options)
+        const sitters = await SitterInfo.findAll(options, { include: User });
         result = sitters.map(sitter => sitter.toJSON());
     } catch (err) {
         res.status(500).json(err);
