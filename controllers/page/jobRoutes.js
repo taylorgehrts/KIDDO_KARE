@@ -9,7 +9,9 @@ router.get('/:id', async (req, res) => {
     const children = getChildrenInJob(jobId);
     const interestedSitters = getInterestedSitters(jobId);
 
-    res.render('job', { job, children, interestedSitters });
+    res.render('job', { job, children, interestedSitters,
+                        isSitter: req.session.isSitter,
+                        userId: req.session.userId });
 });
 
 module.exports = router;

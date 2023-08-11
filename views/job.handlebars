@@ -16,6 +16,10 @@
     <p>Name: {{child.firstName}}</p>
 {{/each}}
 
+{{#if isSitter}}
+    <button id="interest-sitter">Apply</button>
+    <div id="user-id" data-id="{{userId}}"></div>
+{{/if}}
 <h2>
     Interested Sitters
 </h2>
@@ -24,3 +28,7 @@
     <li><a href="/sitter/{{sitter.id}}">{{sitter.userName}}</a></li>
 {{/each}}
 </ul>
+
+{{#if isSitter}}
+    <script src="/js/jobForSitter.js"></script>
+{{/if}}

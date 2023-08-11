@@ -1,8 +1,10 @@
 const router = require('express').Router()
-
-const { SitterInfo, User } = require('../../models');
 const sequelize = require('sequelize');
 const Op = sequelize.Op
+
+const { SitterInfo, User } = require('../../models');
+const { interestSitter } = require('../../models/lib/create');
+
 
 router.get('/', async (req, res) => {
     const filters = req.query;
@@ -29,6 +31,16 @@ router.get('/', async (req, res) => {
     }
 
     res.status(200).json(result);
+});
+
+router.post('/interest', async (req, res) => {
+    try {
+        await interestSitter(req.session.userId, req.query.jobId);
+
+        res.status(200).json({ message: "Interest registered!" });
+    } catch (err) {
+        res.status(500).json(err);
+    }
 });
 
 module.exports = router;
