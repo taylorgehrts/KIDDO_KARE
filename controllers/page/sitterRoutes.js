@@ -7,7 +7,7 @@ router.get('/:id', async (req, res) => {
     const user = await User.findByPk(userId);
     const sitter = user.getSitterInfo();
 
-    res.render('sitter', { sitter: sitter.toJson() });
+    res.render('sitter', { sitter: sitter.toJson(), user: user.toJSON() });
 });
 
 module.exports = router;
