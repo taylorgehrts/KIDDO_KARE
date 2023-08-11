@@ -27,12 +27,8 @@ router.get('/', async (req, res) => {
         ];
     }
 
-    requiresCooking = filters.requiresCooking;
-    // Have to explicitly check for exact equals since query field can be undefined
-    if (requiresCooking === false) {
+    if (filters.cookingNotOk === true) {
         options.where.requiresCooking = false;
-    } else if (requiresCooking === true) {
-        options.where.requiresCooking = true;
     }
 
     // Wrap actual database query in a try/catch block
@@ -41,6 +37,7 @@ router.get('/', async (req, res) => {
         jobs = await Job.findAll(options);
         // Serialize the job data objects
         result = jobs.map(job => job.toJSON());
+        console.log(result);
     } catch (err) {
         res.status(500).json(err);
     }
