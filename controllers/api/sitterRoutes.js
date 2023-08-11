@@ -6,7 +6,7 @@ const Op = sequelize.Op
 
 router.get('/', async (req, res) => {
     const filters = req.query;
-    let options = { where: {}, include: User};
+    let options = { where: {}, include: { model: User, attributes: { exclude: ['password'] } } };
     let result;
 
     if (filters.yearsExperience) {
@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
     }
 
     try {
-        const sitters = await SitterInfo.findAll(options, { include: User });
+        const sitters = await SitterInfo.findAll(options);
         result = sitters.map(sitter => sitter.toJSON());
     } catch (err) {
         res.status(500).json(err);

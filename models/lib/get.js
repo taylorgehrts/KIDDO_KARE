@@ -20,9 +20,9 @@ const getJobsInterestedIn = async userId => {
 };
 
 const getInterestedSitters = async jobId => {
-    const job = Job.findByPk(jobId);
-    const sitters = job.getInterestedSitters();
-    const users = Promise.all(sitters.map(async sitter => await sitter.getUser()));
+    const job = await Job.findByPk(jobId);
+    const sitters = await job.getInterestedSitters();
+    const users = await Promise.all(sitters.map(async sitter => await sitter.getUser()));
 
     return users.map(user => user.toJson());
 }
