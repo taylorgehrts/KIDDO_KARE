@@ -17,8 +17,6 @@ const searchFormSubmitHandler = async event => {
     });
     const json = await result.json();
 
-    console.log(json);
-
     for (let job of json) {
         const outerDiv = document.createElement('div');
         const link = document.createElement('a');
