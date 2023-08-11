@@ -63,7 +63,7 @@ router.post('/login', async (req, res) => {
         return res.status(400).json({ message: "Incorrect username or password" });
     }
 
-    const isSitter = user.getSitterInfo() ? true : false;
+    const isSitter = (await user.getSitterInfo()) ? true : false;
 
     if (user.comparePasswordHash(clearTextPassword)) {
         req.session.save(() => {
