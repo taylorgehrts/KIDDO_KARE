@@ -38,6 +38,7 @@ router.post('/', async (req, res) => {
         req.session.save(() => {
             req.session.userId = result.user.id;
             req.session.loggedIn = true;
+            req.session.isSitter = isSitter;
 
             res.status(200).json({ message: 'POST /api/users successful! Logged in!', data: result});
         });
@@ -62,10 +63,13 @@ router.post('/login', async (req, res) => {
         return res.status(400).json({ message: "Incorrect username or password" });
     }
 
+    const isSitter = user.getSitterInfo() ? true : false;
+
     if (user.comparePasswordHash(clearTextPassword)) {
         req.session.save(() => {
             req.session.userId = user.id;
             req.session.loggedIn = true;
+            req.session.isSitter = isSitter;
 
             res.status(200).json({ message: 'Logged in!' });
         });
