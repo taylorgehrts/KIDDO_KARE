@@ -37,9 +37,17 @@ const createUser = async (userData, isSitter, sitterOrParentData, childData = nu
     return result;
 };
 
-const createJob = async (jobData) => {
-    return Array.isArray(jobData) ? await Job.bulkCreate(jobData.map(job => convertJobDatesStore(job)))
-        : await Job.create(convertJobDatesStore(jobData));
+const createJob = async (userId, jobData) => {
+    const parentId = (await (await User.findByPk(userId)).getParentInfo()).id;
+
+    console.log(parentId)
+
+    const result = Array.isArray(jobData) ? await Job.bulkCreate(jobData.map(job => ({ ...convertJobDatesStore(job), parentId })))
+        : await Job.create(({ ...convertJobDatesStore(jobData), parentId}));
+
+    console.log(result);
+
+    return result;
 };
 
 const interestSitter = async (userId, jobId) => {

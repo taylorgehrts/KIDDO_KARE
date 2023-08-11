@@ -1,0 +1,20 @@
+<h1>
+    Post Job for {{user.userName}}
+</h1>
+
+<form id="job-info">
+    <label for="start-time">Enter start time</label>
+    <input type="text" name="start-time" id="start-time">
+    <label for="end-time">Enter end time</label>
+    <input type="text" name="end-time" id="end-time">
+    <label for="description">Enter job details</label>
+    <textarea name="description" id="description" cols="30" rows="10"></textarea>
+    <label for="requires-cooking">Requires cooking?</label>
+    <input type="checkbox" name="requires-cooking" id="requires-cooking">
+
+    <button type="submit">Post Job</button>
+</form>
+
+<div id="user-id" data-id="{{user.id}}"></div>
+
+<script src="/js/post.js"></script>
