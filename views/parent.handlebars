@@ -1,0 +1,49 @@
+<h1>
+    Parent Profile
+</h1>
+<h2>
+    User Name
+</h2>
+<p>
+    {{user.userName}}
+</p>
+<h2>
+    Full Name
+</h2>
+<p>
+    {{user.firstName}} {{user.lastName}}
+</p>
+<h2>
+    Address
+</h2>
+<p>
+    {{user.address}}
+</p>
+<h2>
+    Bio
+</h2>
+<p>
+    {{user.bio}}
+</p>
+<h2>
+    Children
+</h2>
+{{#each children as |child|}}
+    <h3>
+        Name
+    </h3>
+    <p>
+        {{child.firstName}}
+    </p>
+    <h3>
+        Age
+    </h3>
+    <p>
+        {{child.age}}
+    </p>
+{{/each}}
+{{#if ownProfile}}
+    <a href="/edit">Edit Profile</a>
+    <a href="/add">Add Child</a>
+    <a href="/post">Post Job</a>
+{{/if}}

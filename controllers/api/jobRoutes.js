@@ -2,6 +2,8 @@ const router = require('express').Router();
 const sequelize = require('sequelize');
 const Op = sequelize.Op;
 
+const { authParent } = require('../../utils/utils');
+const { createJob } = require('../../models/lib/create');
 const { Job, ParentInfo, User } = require('../../models');
 
 router.get('/', async (req, res) => {
@@ -35,7 +37,7 @@ router.get('/', async (req, res) => {
     try {
         // Apply filters to query
         jobs = await Job.findAll(options);
-        // Serialize the job data objects
+        // Serialize the job data objects   
         result = jobs.map(job => job.toJSON());
         console.log(result);
     } catch (err) {
@@ -45,5 +47,21 @@ router.get('/', async (req, res) => {
     // Send the result
     res.status(200).json(result);
 });
+
+router.post('/:userId', authParent, async (req, res) => {
+    let result;
+    const jobData = req.body;
+
+    jobData.startTime = new Date(jobData.startTime);
+    jobData.endTime = new Date(jobData.endTime);
+
+    try {
+        result = await createJob(Number(req.params.userId), jobData);
+
+        res.status(200).json(result);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}); 
 
 module.exports = router;

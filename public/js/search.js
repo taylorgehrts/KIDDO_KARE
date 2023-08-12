@@ -1,7 +1,7 @@
 const sitterSearchFormSubmitHandler = async event => {
     event.preventDefault();
 
-    const yearsExperience = document.getElementById('years-experience').value;
+    const yearsExperience = document.getElementById('years-experience').value.trim();
     const qualifications = document.getElementById('qualifications').value.replace(/\s/g, '');
     const resultsContainer = document.getElementById('results-container');
 
