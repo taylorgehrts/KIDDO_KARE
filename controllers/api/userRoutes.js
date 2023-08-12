@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const { createUser } = require('../../models/lib/create');
-const { auth } = require('../../utils/utils');
+const { auth, checkUser } = require('../../utils/utils');
 const User = require('../../models/User');
 const { SitterInfo } = require('../../models');
 
@@ -97,7 +97,7 @@ router.put('/:id', auth, async (req, res) => {
 
     try {
         // Disallow users editing other user's profile
-        if (userId != (await User.findByPk(req.session.userId)).id) {
+        if (!checkUser(userId, req.session.userId)) {
             return res.status(401).end();
         }
         // Update user part
