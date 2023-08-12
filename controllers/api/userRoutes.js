@@ -96,6 +96,7 @@ router.put('/:id', auth, async (req, res) => {
     let result;
 
     try {
+        // Disallow users editing other user's profile
         if (userId != (await User.findByPk(req.session.userId)).id) {
             return res.status(401).end();
         }

@@ -6,6 +6,7 @@ const submitEditFormHandler = event => {
     const lastNameValue = document.getElementById('last-name').value.trim();
     const addressValue = document.getElementById('address').value.trim();
     const bioValue = document.getElementById('bio').value.trim();
+    const userId = document.getElementById('user-id').dataset.id;
 
     let yearsExperienceValue;
     let qualificationsValue
@@ -29,7 +30,17 @@ const submitEditFormHandler = event => {
     }
     if (qualificationsValue) body.qualifications = qualificationsValue;
 
+    const result = fetch(`/api/users/${userId}${query}`, {
+        method: 'PUT',
+        body,
+        headers: { 'Content-Type': 'application/json' }
+    });
 
+    if (result.ok) {
+        alert('Profile updated successfully!');
+    } else {
+        alert('There was an error updating your profile');
+    }
 };
 
 document.getElementById('edit-form').addEventListener('submit', submitEditFormHandler);
