@@ -5,7 +5,12 @@ const Job = require('../../models/Job');
 
 router.get('/:id', async (req, res) => {
     const jobId = req.params.id;
-    const job = (await Job.findByPk(jobId)).toJSON();
+    let job;
+    try {
+        job = (await Job.findByPk(jobId)).toJSON();
+    } catch (err) {
+        return res.status(400).json(err);
+    }
     const children = getChildrenInJob(jobId);
     const interestedSitters = getInterestedSitters(jobId);
 

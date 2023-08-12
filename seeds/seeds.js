@@ -50,8 +50,8 @@ const seedData = [
         jobData: [
             {
                 description: 'Looking for a babysitter for my two kids.',
-                startTime: new Date('2023-08-07T08:00:00Z'),
-                endTime: new Date('2023-08-07T12:00:00Z'),
+                startTime: new Date('2023-08-20T08:00:00Z'),
+                endTime: new Date('2023-08-22T12:00:00Z'),
                 
             },
             {
