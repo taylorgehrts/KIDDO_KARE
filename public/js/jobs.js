@@ -1,8 +1,8 @@
 const searchFormSubmitHandler = async event => {
     event.preventDefault();
 
-    const startTime = document.getElementById("start-time").value;
-    const endTime = document.getElementById("end-time").value;
+    const startTime = document.getElementById("start-time").value.trim();
+    const endTime = document.getElementById("end-time").value.trim();
     const cookingNotOk = document.getElementById("require-cooking").checked ? false: true;
     const resultsContainer = document.getElementById("search-results");
 
