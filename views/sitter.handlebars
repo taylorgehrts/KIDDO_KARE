@@ -29,3 +29,6 @@
 <p>
     {{user.bio}}
 </p>
+{{#unless isSitter}}
+    {{> chat userName=user.userName}}
+{{/unless}}

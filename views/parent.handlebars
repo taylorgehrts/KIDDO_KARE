@@ -47,3 +47,6 @@
     <a href="/add">Add Child</a>
     <a href="/post">Post Job</a>
 {{/if}}
+{{#if isSitter}}
+    {{> chat userName=user.userName}}
+{{/if}}
