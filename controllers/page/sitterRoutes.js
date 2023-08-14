@@ -12,7 +12,11 @@ router.get('/:id', async (req, res) => {
     }
     const sitter = await user.getSitterInfo();
 
-    res.render('sitter', { sitter: sitter.toJSON(), user: user.toJSON() });
+    if (sitter) {
+        res.render('sitter', { sitter: sitter.toJSON(), user: user.toJSON() });
+    } else {
+        res.status(404).json({ message: 'Sitter not found' });
+    }
 });
 
 module.exports = router;
