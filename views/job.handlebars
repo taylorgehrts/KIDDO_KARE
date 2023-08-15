@@ -24,6 +24,7 @@
                     <div class="mt-4">
                         <button id="interest-sitter" class="btn btn-primary">Apply</button>
                         <div id="user-id" data-id="{{userId}}"></div>
+                        <script defer src="/js/jobForSitter.js"></script>
                     </div>
                     {{/if}}
                 </div>
@@ -37,7 +38,14 @@
                         <h2>Interested Sitters</h2>
                         <ul>
                             {{#each interestedSitters as |sitter|}}
-                            <li><a href="/sitter/{{sitter.id}}">{{sitter.userName}}</a></li>
+                            <li>
+                                <a href="/sitter/{{sitter.id}}">{{sitter.userName}}</a>
+                                {{#if loggedIn}}
+                                    {{#unless isSitter}}
+                                        <button id=""></button>
+                                    {{/unless}}
+                                {{/if}}
+                            </li>
                             {{/each}}
                         </ul>
                     </div>

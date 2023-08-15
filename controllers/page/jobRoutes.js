@@ -12,8 +12,9 @@ router.get('/:id', async (req, res) => {
     } catch (err) {
         return res.status(400).json(err);
     }
-    const children = getChildrenInJob(jobId);
-    const interestedSitters = getInterestedSitters(jobId);
+    const children = await getChildrenInJob(jobId);
+    const interestedSitters = await getInterestedSitters(jobId);
+    console.log(interestedSitters);
 
     res.render('job', { job, children, interestedSitters,
                         isSitter: req.session.isSitter,
