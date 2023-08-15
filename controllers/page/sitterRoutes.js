@@ -13,7 +13,12 @@ router.get('/:id', async (req, res) => {
     const sitter = await user.getSitterInfo();
 
     if (sitter) {
-        res.render('sitter', { sitter: sitter.toJSON(), user: user.toJSON() });
+        res.render('sitter', { 
+            sitter: sitter.toJSON(), 
+            user: user.toJSON(),
+            loggedIn: req.session.loggedIn,
+            userId: req.session.userId
+        });
     } else {
         res.status(404).json({ message: 'Sitter not found' });
     }
