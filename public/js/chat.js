@@ -32,5 +32,5 @@ socket.on('message', data => {
     msgDiv.textContent = `${data.userName}: ${data.msg}`;
     chatWindow.appendChild(msgDiv);
 
-    chatWindow.scrollTo({ top: msgDiv.scrollHeight });
+    chatWindow.scrollTop = chatWindow.scrollHeight;
 });
