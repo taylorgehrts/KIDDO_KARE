@@ -17,7 +17,8 @@ router.get('/:id', async (req, res) => {
             sitter: sitter.toJSON(), 
             user: user.toJSON(),
             loggedIn: req.session.loggedIn,
-            userId: req.session.userId
+            userId: req.session.userId,
+            isSitter: req.session.isSitter
         });
     } else {
         res.status(404).json({ message: 'Sitter not found' });

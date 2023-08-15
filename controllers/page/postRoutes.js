@@ -13,7 +13,8 @@ router.get('/', authParent, async (req, res) => {
     res.render('post', { 
         user,
         isSitter: req.session.isSitter,
-        loggedIn: req.session.loggedIn
+        loggedIn: req.session.loggedIn,
+        userId
     });
 });
 
