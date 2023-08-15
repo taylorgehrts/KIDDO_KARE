@@ -20,9 +20,9 @@ const chatFormSubmitHandler = event => {
     }
 
     // Recieve chat messages
-    socket.on('message', msg => {
+    socket.on('message', (userName, msg) => {
         var msgDiv = document.createElement('div');
-        msgDiv.textContent = msg;
+        msgDiv.textContent = `${userName}: ${msg}`;
         chatWindow.append(msgDiv);
 
         msgDiv.scrollTo({ top: msgDiv.scrollHeight });
