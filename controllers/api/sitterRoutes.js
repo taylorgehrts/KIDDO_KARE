@@ -43,4 +43,8 @@ router.post('/interest', async (req, res) => {
     }
 });
 
+router.post('/:sitterId/accept/:jobId', async (req, res) => {
+
+});
+
 module.exports = router;
