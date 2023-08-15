@@ -12,7 +12,12 @@ router.get('/:id', async (req, res) => {
     }
     const sitter = await user.getSitterInfo();
 
-    res.render('sitter', { sitter: sitter.toJSON(), user: user.toJSON() });
+    res.render('sitter', { 
+        sitter: sitter.toJSON(), 
+        user: user.toJSON(),
+        isSitter: req.session.isSitter,
+        loggedIn: req.session.loggedIn
+     });
 });
 
 module.exports = router;

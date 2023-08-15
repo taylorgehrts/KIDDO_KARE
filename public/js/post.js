@@ -6,6 +6,7 @@ const submitJobHandler = async event => {
     const description = document.getElementById('description').value;
     const requiresCooking = document.getElementById('requires-cooking').checked;
     const userId = document.getElementById('user-id').dataset.id;
+    const instructions = document.getElementById('instructions').value;
 
     const result = await fetch(`/api/jobs/${userId}`, {
         method: 'POST',
@@ -14,7 +15,8 @@ const submitJobHandler = async event => {
             endTime,
             description,
             requiresCooking,
-            userId
+            userId,
+            instructions
         },
         headers: { 'Content-Type': 'application/json' }
     });
