@@ -23,6 +23,9 @@ SitterInfo.init({
     age: {
         type: DataTypes.INTEGER
     },
+    certifications: {
+        type: DataTypes.TEXT
+    },
     yearsExperience: {
         type: DataTypes.INTEGER
     },
