@@ -5,6 +5,8 @@ const { authParent } = require('../../utils/utils');
 
 router.get('/', authParent, async (req, res) => {
     const userId = req.session.userId;
+    const isSitter = req.session.isSitter;
+    const loggedIn = req.session.loggedIn;
     const user = await User.findByPk(userId, { 
         attributes: {
              exclude: ['password'] 
@@ -13,7 +15,9 @@ router.get('/', authParent, async (req, res) => {
 
     res.render('add', {
         user,
-        parent
+        parent,
+        isSitter,
+        loggedIn
     });
 });
 

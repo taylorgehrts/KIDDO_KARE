@@ -13,6 +13,8 @@ const postRoutes = require('./postRoutes');
 
 router.use('/', homeRoutes);
 router.use('/login', loginRoutes);
+
+
 router.use('/jobs', jobsRoutes);
 router.use('/job', jobRoutes);
 router.use('/parent', parentRoutes);

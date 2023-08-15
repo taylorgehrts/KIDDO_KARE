@@ -5,6 +5,7 @@ const { auth } = require('../../utils/utils');
 
 router.get('/', auth, async (req, res) => {
     const userId = req.session.userId;
+    const loggedIn = req.session.loggedIn;
     let user;
 
     try {
@@ -29,6 +30,7 @@ router.get('/', auth, async (req, res) => {
     res.render('edit', {
         user,
         isSitter,
+        loggedIn,
         info
     });
 });

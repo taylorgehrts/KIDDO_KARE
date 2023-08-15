@@ -22,10 +22,7 @@ ChildInfo.init({
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    firstName: {
-        type: DataTypes.STRING
-    },
-    lastName: {
+    name: {
         type: DataTypes.STRING
     },
     parentId: {

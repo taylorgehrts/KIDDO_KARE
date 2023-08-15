@@ -1,0 +1,59 @@
+<h1>this is the homepage</h1>
+{{!-- This is the homepage --}}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Babysitting App - Home</title>
+    {{!-- <link rel="stylesheet" href="/css/styles.css"> Include your CSS file  --}}
+    <style>
+        /* Add custom CSS here */
+        .image-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .image-section img {
+            max-width: 30%; /* Adjust the width of the images */
+        }
+      /*  .links-section {
+            margin-top: 20px;
+        }
+         Add more custom styles as needed */
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Babysitting App!</h1>
+    </header>
+    
+    <main>
+        <div class="hero position-relative d-flex justify-content-center align-items-center text-center">
+    <div class="overlay-card bg-light p-4 rounded">    <div class="overlay-card bg-light p-4 rounded">
+      <h2 class="card-title">Welcome to Kiddo Kare</h2>
+      <p class="card-text">Kiddo Kare is a babysitting app that connects parents with trusted babysitters. Whether you're a parent looking for reliable childcare or a babysitter looking for job opportunities, Kiddo Kare has you covered.</p>
+      <a href="/login" class="btn btn-primary">Get Started</a>
+    </div>
+  </div>
+        <section class="image-section">
+            <img src="/images/building_blocks.png" alt="Building Blocks">
+            <img src="/images/child_care.png" alt="Child Care">
+            <!-- Add more images here if needed -->
+        </section>
+        
+        {{!-- <section class="links-section">
+            <h2>Explore the App</h2>
+            <ul>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/booking">Bookings</a></li>
+                <!-- Add more links to other pages as needed -->
+            </ul>
+        </section> --}}
+    </main>
+    
+    <footer>
+        <p>&copy; 2023 Babysitting App. All rights reserved.</p>
+    </footer>
+</body>
+</html>
