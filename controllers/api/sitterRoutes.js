@@ -2,7 +2,7 @@ const router = require('express').Router()
 const sequelize = require('sequelize');
 const Op = sequelize.Op
 
-const { SitterInfo, User } = require('../../models');
+const { SitterInfo, User, Job } = require('../../models');
 const { interestSitter } = require('../../models/lib/create');
 
 
@@ -44,6 +44,20 @@ router.post('/interest', async (req, res) => {
 });
 
 router.post('/:sitterId/accept/:jobId', async (req, res) => {
+    const sitterId = req.params.sitterId;
+    const jobId = req.params.jobId;
+
+    try {
+        await Job.update({ workerId: sitterId }, {
+            where: {
+                id: jobId
+            }
+        });
+
+        res.status(200).json({ message: "Sitter accepted!" });
+    } catch (err) {
+        res.status(500).json(err);
+    }
 
 });
 

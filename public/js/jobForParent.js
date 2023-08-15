@@ -5,13 +5,14 @@ document.querySelectorAll('.accept-sitter').forEach(btn => {
         event.preventDefault();
 
         const sitterId = btn.dataset.sitterId;
-        const result = await fetch(`/api/sitter/${sitterId}/accept/${jobId}`, {
+        const result = await fetch(`/api/sitters/${sitterId}/accept/${jobId}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' }
         });
 
         if(result.ok) {
             alert("Sitter accepted!");
+            location.reload();
         } else {
             alert("There was an error");
         }

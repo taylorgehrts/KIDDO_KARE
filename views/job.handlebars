@@ -5,6 +5,11 @@
                 <div class="card-body">
                     <h1 class="card-title">Job Details</h1>
 
+                    {{#if acceptedUserId}}
+                        <p>This job has been claimed by</p>
+                        <a href="/sitter/{{acceptedUserId}}">{{acceptedUserName}}</a>
+                    {{/if}}
+
                     <div class="mt-4">
                         <h2>Description</h2>
                         <p>{{job.description}}</p>
