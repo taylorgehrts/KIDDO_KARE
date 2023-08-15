@@ -5,7 +5,6 @@ const chatFormSubmitHandler = event => {
 
     const messageBox = document.getElementById('chat-box');
     const message = messageBox.value;
-    const chatWindow = document.getElementById('chat-window');
     const pageUserId = document.getElementById('page-user').dataset.id;
     const loggedInUserId = document.getElementById('logged-in-user').dataset.id;
 
@@ -25,8 +24,10 @@ const chatFormSubmitHandler = event => {
 document.getElementById('chat-form').addEventListener('submit', chatFormSubmitHandler);
 
 // Recieve chat messages
+const chatWindow = document.getElementById('chat-window');
+
 socket.on('message', (userName, msg) => {
-    var msgDiv = document.createElement('div');
+    const msgDiv = document.createElement('div');
     msgDiv.textContent = `${userName}: ${msg}`;
     chatWindow.append(msgDiv);
 
