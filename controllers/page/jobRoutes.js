@@ -5,6 +5,7 @@ const Job = require('../../models/Job');
 
 router.get('/:id', async (req, res) => {
     const jobId = req.params.id;
+    const loggedIn = req.session.loggedIn;
     let job;
     try {
         job = (await Job.findByPk(jobId)).toJSON();
@@ -16,6 +17,7 @@ router.get('/:id', async (req, res) => {
 
     res.render('job', { job, children, interestedSitters,
                         isSitter: req.session.isSitter,
+                        loggedIn,
                         userId: req.session.userId });
 });
 

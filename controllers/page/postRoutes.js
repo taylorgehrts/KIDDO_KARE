@@ -11,7 +11,9 @@ router.get('/', authParent, async (req, res) => {
         } 
     });
     res.render('post', { 
-        user
+        user,
+        isSitter: req.session.isSitter,
+        loggedIn: req.session.loggedIn
     });
 });
 
