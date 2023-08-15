@@ -40,9 +40,9 @@
                             {{#each interestedSitters as |sitter|}}
                             <li>
                                 <a href="/sitter/{{sitter.id}}">{{sitter.userName}}</a>
-                                {{#if loggedIn}}
-                                    {{#unless isSitter}}
-                                        <button id=""></button>
+                                {{#if ../loggedIn}}
+                                    {{#unless ../isSitter}}
+                                        <button class="accept-sitter btn btn-primary">Accept</button>
                                     {{/unless}}
                                 {{/if}}
                             </li>

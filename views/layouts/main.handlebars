@@ -31,11 +31,12 @@
                     </li>
                     {{#if loggedIn }}
                     <li class="nav-item">
-                        <button id="logout" class="btn">Logout</button>
-                        </li>
-                        {{#unless isSitter}}
-                        <li class="nav-item">
-                        <a class="nav-link" href="/post"></a>
+                        <button class="nav-link" onclick="logout()">Logout</button>
+                    </li>
+                    <script defer src="/js/logout.js"></script>
+                    {{#unless isSitter}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/post">Post Job</a>
                     </li>
                     {{/unless}}
 
