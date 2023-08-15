@@ -20,6 +20,9 @@ SitterInfo.init({
             key: 'id'
         }
     },
+    age: {
+        type: DataTypes.INTEGER
+    },
     yearsExperience: {
         type: DataTypes.INTEGER
     },

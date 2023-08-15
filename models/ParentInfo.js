@@ -19,6 +19,9 @@ ParentInfo.init({
             model: User,
             key: 'id'
         }
+    },
+    bedTime: {
+        type: DataTypes.STRING
     }
 },
 {
