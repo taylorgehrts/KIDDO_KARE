@@ -28,6 +28,7 @@ router.get('/', auth, async (req, res) => {
     }
 
     res.render('edit', {
+        userId,
         user,
         isSitter,
         loggedIn,

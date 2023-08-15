@@ -14,6 +14,7 @@ router.get('/', authParent, async (req, res) => {
     const parent = await user.getParentInfo();
 
     res.render('add', {
+        userId,
         user,
         parent,
         isSitter,
