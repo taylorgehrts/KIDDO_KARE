@@ -29,7 +29,9 @@ router.post('/', async (req, res) => {
         }
     } else {
         // TODO decide what goes in ParentInfo (if anything) and serialize it here
-        sitterOrParentData = {};
+        sitterOrParentData = {
+            bedTime: data.bedTime
+        };
 
         childData = data.childData;
     }
@@ -45,6 +47,7 @@ router.post('/', async (req, res) => {
             res.status(200).json({ message: 'POST /api/users successful! Logged in!', data: result});
         });
     } catch (err) {
+        console.error(err);
         res.status(500).json(err);
     }
 });

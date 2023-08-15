@@ -11,9 +11,10 @@ const editRoutes = require('./editRoutes');
 const addRoutes = require('./addRoutes');
 const postRoutes = require('./postRoutes');
 
-
 router.use('/', homeRoutes);
 router.use('/login', loginRoutes);
+
+
 router.use('/jobs', jobsRoutes);
 router.use('/job', jobRoutes);
 router.use('/parent', parentRoutes);

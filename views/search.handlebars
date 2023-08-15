@@ -1,13 +1,32 @@
-<form id="filters">
-    <input type="text" id="years-experience" placeholder="Minimum Years Experience">
-    <label for="qualifications">Enter any single keywords for qualifications you need for the job, separated by commas:</label>
-    <textarea name="qualifications" id="qualifications" cols="30" rows="10"></textarea>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-12">
+      <p class="lead">Use the filters below to search for babysitters based on their years of experience and qualifications.</p>
+    </div>
+  </div>
 
-    <button type="submit">Search</button>
-</form>
+  <div class="row">
+    <div class="col-md-6">
+      <form id="filters">
+        <div class="mb-3">
+          <input type="text" class="form-control" id="years-experience" placeholder="Minimum Years Experience">
+        </div>
+        <div class="mb-3">
+          <label for="qualifications" class="form-label">Enter any single keywords for qualifications you need for the job, separated by commas:</label>
+          <textarea class="form-control" name="qualifications" id="qualifications" cols="30" rows="5"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+    </div>
+  </div>
 
-<div id="results-container">
-    <!-- Sitter search results populate here -->
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div id="results-container">
+        <!-- Sitter search results populate here -->
+      </div>
+    </div>
+  </div>
 </div>
 
 <script src="/js/search.js"></script>
