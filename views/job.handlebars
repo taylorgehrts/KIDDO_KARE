@@ -65,17 +65,22 @@
             <p>{{job.instructions}}</p>
         </div>
     </div>
-
-    <div class="row mt-4">
-        <div class="col-lg-12">
-            <h2>Messages</h2>
-            <!-- Messages content goes here -->
-        </div>
-    </div>
-</div>
 {{#if loggedIn}}
+    <div id="job-id" data-id="{{job.id}}"></div>
+    {{#showChat jobOwnerId userId acceptedUserId}}
+        <div class="row mt-4">
+            <div class="col-lg-12">
+                <h2>Messages</h2>
+                <div id="message-window">
+
+                </div>
+            </div>
+        </div>
+    {{else}}
+
+    {{/showChat}}
+</div>
     {{#unless isSitter}}
-        <div id="job-id" data-id="{{job.id}}"></div>
         <script src="/js/jobForParent.js"></script>
     {{/unless}}
 {{/if}}

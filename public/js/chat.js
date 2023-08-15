@@ -5,14 +5,13 @@ const chatFormSubmitHandler = event => {
 
     const messageBox = document.getElementById('chat-box');
     const message = messageBox.value;
-    const pageUserId = document.getElementById('page-user').dataset.id;
-    const loggedInUserId = document.getElementById('logged-in-user').dataset.id;
+    const jobId = document.getElementById('job-id').dataset.id;
 
     // Emit socket.io event
     if (message) {
         socket.emit(`message`, {
             message,
-            users: [pageUserId, loggedInUserId]
+            jobId
         });
         messageBox.value = '';
     }
