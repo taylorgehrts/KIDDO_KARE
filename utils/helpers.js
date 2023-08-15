@@ -1,6 +1,13 @@
 const { Job } = require('../models');
 
 module.exports = {
+    isJobOwner: function(userId, jobOwnerId, options) {
+        if (userId === jobOwnerId) {
+            return options.fn(this);
+        } else {
+            return options.inverse(this);
+        }
+    },
     showChat: function(jobOwnerId, userId, acceptedUserId, options) {
         // console.log(jobOwnerId, userId, acceptedUserId);
         if (userId == jobOwnerId || userId == acceptedUserId) {

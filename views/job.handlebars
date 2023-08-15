@@ -46,9 +46,10 @@
                             <li>
                                 <a href="/sitter/{{sitter.id}}">{{sitter.userName}}</a>
                                 {{#if ../loggedIn}}
-                                    {{#unless ../isSitter}}
+                                    {{#isJobOwner ../userId ../jobOwnerId}}
                                         <button class="accept-sitter btn btn-primary" data-sitter-id="{{sitter.id}}">Accept</button>
-                                    {{/unless}}
+                                    {{else}}
+                                    {{/isJobOwner}}
                                 {{/if}}
                             </li>
                             {{/each}}
