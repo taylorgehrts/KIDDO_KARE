@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { getChildrenInJob, getInterestedSitters } = require('../../models/lib/get');
+const { getChildren, getInterestedSitters } = require('../../models/lib/get');
 const { Job, SitterInfo } = require('../../models');
 
 router.get('/:id', async (req, res) => {
@@ -19,7 +19,8 @@ router.get('/:id', async (req, res) => {
     } catch (err) {
         return res.status(400).json(err);
     }
-    const children = await getChildrenInJob(jobId);
+    const children = await getChildren(jobOwnerId);
+    console.log("children:", children);
     const interestedSitters = await getInterestedSitters(jobId);
     console.log(req.session.loggedIn, req.session.isSitter);
 
