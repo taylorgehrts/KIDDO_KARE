@@ -10,9 +10,9 @@ const sequelize = new Sequelize(
     dialect: 'mysql',
     port: 3306,
     //file path for taylor to run on mac
-    // dialectOptions: {
-    //  socketPath: '/tmp/mysql.sock'
-    //  }
+    //  dialectOptions: {
+    //   socketPath: '/tmp/mysql.sock'
+    //   }
   }
 );
 
