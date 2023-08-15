@@ -1,4 +1,4 @@
-var socket = io();
+const socket = io();
 
 const chatFormSubmitHandler = event => {
     event.preventDefault();
@@ -19,14 +19,16 @@ const chatFormSubmitHandler = event => {
         messageBox.value = '';
     }
 
-    // Recieve chat messages
-    socket.on('message', (userName, msg) => {
-        var msgDiv = document.createElement('div');
-        msgDiv.textContent = `${userName}: ${msg}`;
-        chatWindow.append(msgDiv);
 
-        msgDiv.scrollTo({ top: msgDiv.scrollHeight });
-    });
 };
 
 document.getElementById('chat-form').addEventListener('submit', chatFormSubmitHandler);
+
+// Recieve chat messages
+socket.on('message', (userName, msg) => {
+    var msgDiv = document.createElement('div');
+    msgDiv.textContent = `${userName}: ${msg}`;
+    chatWindow.append(msgDiv);
+
+    msgDiv.scrollTo({ top: msgDiv.scrollHeight });
+});
