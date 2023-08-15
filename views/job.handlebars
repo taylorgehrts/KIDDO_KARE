@@ -46,9 +46,10 @@
                             <li>
                                 <a href="/sitter/{{sitter.id}}">{{sitter.userName}}</a>
                                 {{#if ../loggedIn}}
-                                    {{#unless ../isSitter}}
+                                    {{#isJobOwner ../userId ../jobOwnerId}}
                                         <button class="accept-sitter btn btn-primary" data-sitter-id="{{sitter.id}}">Accept</button>
-                                    {{/unless}}
+                                    {{else}}
+                                    {{/isJobOwner}}
                                 {{/if}}
                             </li>
                             {{/each}}
@@ -65,17 +66,36 @@
             <p>{{job.instructions}}</p>
         </div>
     </div>
-
-    <div class="row mt-4">
-        <div class="col-lg-12">
-            <h2>Messages</h2>
-            <!-- Messages content goes here -->
-        </div>
-    </div>
-</div>
 {{#if loggedIn}}
+    <div id="job-id" data-id="{{job.id}}"></div>
+    <div id="user-name" data-name="{{userName}}"></div>
+    {{#showChat jobOwnerId userId acceptedUserId}}
+        <style>
+            #chat-window {
+                width: 40%;
+                height: 300px;
+                overflow-y: scroll;
+            }
+        </style>
+        <div class="row mt-4">
+            <div class="col-lg-12">
+                <h2>Messages</h2>
+                <div id="chat-window">
+                    <!-- Messages populate here -->
+                </div>
+                <form id="chat-form">
+                    <input type="text" id="chat-box">
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+        </div>
+        <script defer src="/socket.io/socket.io.js"></script>
+        <script defer src="/js/chat.js"></script>
+    {{else}}
+
+    {{/showChat}}
+</div>
     {{#unless isSitter}}
-        <div id="job-id" data-id="{{job.id}}"></div>
         <script src="/js/jobForParent.js"></script>
     {{/unless}}
 {{/if}}

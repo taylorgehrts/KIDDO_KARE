@@ -12,12 +12,16 @@ router.get('/:id', async (req, res) => {
     }
     const sitter = await user.getSitterInfo();
 
-    res.render('sitter', { 
-        sitter: sitter.toJSON(), 
-        user: user.toJSON(),
-        isSitter: req.session.isSitter,
-        loggedIn: req.session.loggedIn
-     });
+    if (sitter) {
+        res.render('sitter', { 
+            sitter: sitter.toJSON(), 
+            user: user.toJSON(),
+            loggedIn: req.session.loggedIn,
+            userId: req.session.userId
+        });
+    } else {
+        res.status(404).json({ message: 'Sitter not found' });
+    }
 });
 
 module.exports = router;

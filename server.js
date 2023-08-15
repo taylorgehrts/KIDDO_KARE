@@ -6,6 +6,7 @@ const session = require("express-session")
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const exphbs = require('express-handlebars');
 const helpers = require('./utils/helpers');
+const { Server } = require('socket.io');
 
 //initialize express
 const app = express();
@@ -64,7 +65,21 @@ sequelize.sync({ force: true }).then(() => {
   seedAll();
   // The `force: false` option ensures that existing data in the tables won't be dropped.
   // Set `force: true` to drop existing data and re-create the tables.
-  app.listen(PORT, () => {
+  const server = app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}!`);
+  });
+
+  const io = new Server(server);
+
+  io.on('connection', socket => {
+    socket.on('join', id => {
+      socket.join(`${id}`);
+    })
+
+    socket.on('message', data => {
+      io.to(`${data.jobId}`).emit('message', { userName: data.userName, 
+                                               msg: data.message
+                                             });
+    });
   });
 });
