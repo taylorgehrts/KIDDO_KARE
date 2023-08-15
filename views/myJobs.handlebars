@@ -1,0 +1,10 @@
+<h1>
+    Jobs for {{userName}}
+</h1>
+<ul>
+{{#each jobs as |job|}}
+    <li>
+        <a href="/job/{{job.id}}">{{job.description}}</a>
+    </li>
+{{/each}}
+</ul>
