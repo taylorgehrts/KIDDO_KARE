@@ -12,8 +12,7 @@ const chatFormSubmitHandler = event => {
     if (message) {
         socket.emit(`message`, {
             message,
-            pageUserId,
-            loggedInUserId
+            users: [pageUserId, loggedInUserId]
         });
         messageBox.value = '';
     }
