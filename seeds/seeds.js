@@ -37,13 +37,11 @@ const seedData = [
         },
         childData: [
             {
-                firstName: 'Alex',
-                lastName: 'Jorgenson',
+                name: 'Alex',
                 age: 7,
             },
             {
-                firstName: 'Ella',
-                lastName: 'Jorgenson',
+                name: 'Ella',
                 age: 4,
             },
         ],
