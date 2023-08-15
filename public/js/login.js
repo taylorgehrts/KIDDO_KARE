@@ -26,7 +26,7 @@ loginForm.addEventListener('submit', async (event) => {
         
         if (response.ok) {
             // Successfully logged in
-            window.location.href = '/profile'; // Redirect to profile or another page
+            window.location.href = '/'; // Redirect to profile or another page
         } else {
             // Handle login error
             console.error(data.message);
