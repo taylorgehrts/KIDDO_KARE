@@ -9,11 +9,13 @@ router.get('/:id', async (req, res) => {
     let job;
     let acceptedUser;
     let jobJson;
+    let user;
     let jobOwnerId;
     try {
         job = await Job.findByPk(jobId);
         jobJson = job.toJSON();
-        jobOwnerId = (await (await job.getParentInfo()).getUser()).id
+        user = (await (await job.getParentInfo()).getUser())
+        jobOwnerId = user.id;
     } catch (err) {
         return res.status(400).json(err);
     }
@@ -33,7 +35,8 @@ router.get('/:id', async (req, res) => {
                         isSitter: req.session.isSitter,
                         loggedIn,
                         userId: req.session.userId, 
-                        acceptedUserId, acceptedUserName, jobOwnerId
+                        acceptedUserId, acceptedUserName, jobOwnerId,
+                        userName: user.userName
                     });
 });
 

@@ -1,22 +1,25 @@
 const socket = io();
 
+socket.emit('join', `${jobId}`);
+
 const chatFormSubmitHandler = event => {
     event.preventDefault();
 
+    const jobId = document.getElementById('job-id').dataset.id;
+    const userName = document.getElementById('user-name').dataset.name;
     const messageBox = document.getElementById('chat-box');
     const message = messageBox.value;
-    const jobId = document.getElementById('job-id').dataset.id;
+    
 
     // Emit socket.io event
     if (message) {
         socket.emit(`message`, {
             message,
+            userName,
             jobId
         });
         messageBox.value = '';
     }
-
-
 };
 
 document.getElementById('chat-form').addEventListener('submit', chatFormSubmitHandler);
@@ -24,10 +27,10 @@ document.getElementById('chat-form').addEventListener('submit', chatFormSubmitHa
 // Recieve chat messages
 const chatWindow = document.getElementById('chat-window');
 
-socket.on('message', (userName, msg) => {
+socket.on('message', data => {
     const msgDiv = document.createElement('div');
-    msgDiv.textContent = `${userName}: ${msg}`;
-    chatWindow.append(msgDiv);
+    msgDiv.textContent = `${data.userName}: ${data.msg}`;
+    chatWindow.appendChild(msgDiv);
 
-    msgDiv.scrollTo({ top: msgDiv.scrollHeight });
+    chatWindow.scrollTo({ top: msgDiv.scrollHeight });
 });

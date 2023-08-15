@@ -68,15 +68,22 @@
     </div>
 {{#if loggedIn}}
     <div id="job-id" data-id="{{job.id}}"></div>
+    <div id="user-name" data-name="{{userName}}"></div>
     {{#showChat jobOwnerId userId acceptedUserId}}
         <div class="row mt-4">
             <div class="col-lg-12">
                 <h2>Messages</h2>
-                <div id="message-window">
-
+                <div id="chat-window">
+                    <!-- Messages populate here -->
                 </div>
+                <form id="chat-form">
+                    <input type="text" id="chat-box">
+                    <button type="submit">Send</button>
+                </form>
             </div>
         </div>
+        <script defer src="/socket.io/socket.io.js"></script>
+        <script defer src="/js/chat.js"></script>
     {{else}}
 
     {{/showChat}}
