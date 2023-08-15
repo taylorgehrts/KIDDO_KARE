@@ -1,34 +1,63 @@
-<h1>
-    Job Details
-</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h1 class="card-title">Job Details</h1>
 
-<h2>
-    Description
-</h2>
-<p>
-    {{job.description}}
-</p>
-<h2>
-    Children
-</h2>
-{{#each children as |child|}}
-    <p>Age: {{child.age}}</p>
-    <p>Name: {{child.firstName}}</p>
-{{/each}}
+                    <div class="mt-4">
+                        <h2>Description</h2>
+                        <p>{{job.description}}</p>
+                    </div>
 
-{{#if isSitter}}
-    <button id="interest-sitter">Apply</button>
-    <div id="user-id" data-id="{{userId}}"></div>
-{{/if}}
-<h2>
-    Interested Sitters
-</h2>
-<ul>
-{{#each interestedSitters as |sitter|}}
-    <li><a href="/sitter/{{sitter.id}}">{{sitter.userName}}</a></li>
-{{/each}}
-</ul>
+                    <div class="mt-4">
+                        <h2>Children</h2>
+                        {{#each children as |child|}}
+                        <div class="mb-2">
+                            <p>Age: {{child.age}}</p>
+                            <p>Name: {{child.firstName}}</p>
+                        </div>
+                        {{/each}}
+                    </div>
 
-{{#if isSitter}}
-    <script src="/js/jobForSitter.js"></script>
-{{/if}}
+                    {{#if isSitter}}
+                    <div class="mt-4">
+                        <button id="interest-sitter" class="btn btn-primary">Apply</button>
+                        <div id="user-id" data-id="{{userId}}"></div>
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="mt-4">
+                        <h2>Interested Sitters</h2>
+                        <ul>
+                            {{#each interestedSitters as |sitter|}}
+                            <li><a href="/sitter/{{sitter.id}}">{{sitter.userName}}</a></li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-12">
+            <h2>Job Instructions</h2>
+            {{!-- replace with dynamic data --}}
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec tellus urna.</p>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-12">
+            <h2>Messages</h2>
+            <!-- Messages content goes here -->
+        </div>
+    </div>
+</div>
