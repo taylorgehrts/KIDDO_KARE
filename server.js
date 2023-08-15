@@ -49,6 +49,16 @@ app.use(routes);
 
 // Sync sequelize models to the database, then turn on the server 
 //TURN OFF force true for deployment
+// EF - route for saving sessions, successful login
+app.post('/api/users/save-session', (req, res) => {
+  if (req.session.userId && req.session.loggedIn) {
+      req.session.save(() => {
+          res.status(200).json({ message: 'Session saved' });
+      });
+  } else {
+      res.status(400).json({ message: 'Session not saved' });
+  }
+});
 sequelize.sync({ force: true }).then(() => {
   // Seed data
   seedAll();
