@@ -16,13 +16,7 @@ const authParent = (req, res, next) => (req.session.loggedIn && !req.session.isS
 
 const authSitter = (req, res, next) => req.session.loggedIn && req.session.isSitter ? next() : res.redirect('/login');
 
-const checkUser = async (userId, sessionId) => {
-    if (userId != (await User.findByPk(sessionId)).id) {
-        return false;
-    }
-
-    return true;
-}
+const checkUser = async (userId, sessionId) => userId == (await User.findByPk(sessionId)).id;
 
 module.exports = {
     convertJobDatesStore, 
