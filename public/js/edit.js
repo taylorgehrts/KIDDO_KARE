@@ -1,4 +1,4 @@
-const submitEditFormHandler = event => {
+const submitEditFormHandler = async event => {
     event.preventDefault();
 
     const userNameValue = document.getElementById('user-name').value.trim();
@@ -30,9 +30,9 @@ const submitEditFormHandler = event => {
     }
     if (qualificationsValue) body.qualifications = qualificationsValue;
 
-    const result = fetch(`/api/users/${userId}${query}`, {
+    const result = await fetch(`/api/users/${userId}${query}`, {
         method: 'PUT',
-        body,
+        body: JSON.stringify(body),
         headers: { 'Content-Type': 'application/json' }
     });
 

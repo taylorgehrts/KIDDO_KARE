@@ -10,14 +10,14 @@ const submitJobHandler = async event => {
 
     const result = await fetch(`/api/jobs/${userId}`, {
         method: 'POST',
-        body: {
+        body: JSON.stringify({
             startTime,
             endTime,
             description,
             requiresCooking,
             userId,
             instructions
-        },
+        }),
         headers: { 'Content-Type': 'application/json' }
     });
 
