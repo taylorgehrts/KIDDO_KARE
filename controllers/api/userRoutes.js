@@ -122,7 +122,7 @@ router.put('/:id', auth, async (req, res) => {
             result.sitter = await SitterInfo.update(sitterData, { where: { id: sitterId } });
         }
 
-        res.status(200).json(result);
+        res.status(200).json({ ok: true, result });
     } catch (err) {
         res.status(500).json(err);
     }
