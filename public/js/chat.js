@@ -27,6 +27,20 @@ document.getElementById('chat-form').addEventListener('submit', chatFormSubmitHa
 // Recieve chat messages
 const chatWindow = document.getElementById('chat-window');
 
+// Poulate chatWindow with message history
+
+fetch(`/api/messages/${jobId}`).then(response => {
+    response.json().then(data => {
+        for (msg of data) {
+            const msgDiv = document.createElement('div');
+            msgDiv.textContent = `${msg.senderName}: ${msg.body}`;
+            chatWindow.appendChild(msgDiv);
+
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
+    })
+});
+
 socket.on('message', data => {
     const msgDiv = document.createElement('div');
     msgDiv.textContent = `${data.userName}: ${data.msg}`;

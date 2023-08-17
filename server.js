@@ -7,6 +7,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const exphbs = require('express-handlebars');
 const helpers = require('./utils/helpers');
 const { Server } = require('socket.io');
+const { Message, User } = require('./models')
 
 //initialize express
 const app = express();
@@ -76,10 +77,17 @@ sequelize.sync({ force: true }).then(() => {
       socket.join(`${id}`);
     })
 
-    socket.on('message', data => {
-      io.to(`${data.jobId}`).emit('message', { userName: data.userName, 
-                                               msg: data.message
-                                             });
+    socket.on('message', async data => {
+      await Message.create({
+        body: data.message,
+        senderName: data.userName,
+        jobId: data.jobId
+      });
+
+      io.to(`${data.jobId}`).emit('message', { 
+        userName: data.userName, 
+        msg: data.message
+      });
     });
   });
 });
