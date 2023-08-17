@@ -78,15 +78,9 @@ sequelize.sync({ force: true }).then(() => {
     })
 
     socket.on('message', async data => {
-      const userId = (await User.findOne({
-        where: {
-          userName: data.userName
-        }
-      })).id;
-      
       await Message.create({
         body: data.message,
-        senderId: userId,
+        senderName: data.userName,
         jobId: data.jobId
       });
 

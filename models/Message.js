@@ -18,12 +18,8 @@ Message.init({
         type: DataTypes.TEXT,
         allowNull: false
     },
-    senderId: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: User,
-            key: 'id'
-        }
+    senderName: {
+        type: DataTypes.STRING
     },
     jobId: {
         type: DataTypes.INTEGER,
