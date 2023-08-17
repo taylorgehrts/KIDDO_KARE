@@ -43,5 +43,6 @@ Job.belongsToMany(SitterInfo, {
 
 module.exports = {
     User, ParentInfo, SitterInfo, ChildInfo,
-    Job, SitterInterests
+    Job, SitterInterests,
+    Message
 }
