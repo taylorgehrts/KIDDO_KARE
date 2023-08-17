@@ -35,6 +35,9 @@ Job.belongsToMany(SitterInfo, {
     as: 'interestedSitters'
  });
 
+ User.hasMany(Message, { foreignKey: 'senderId' });
+ Message.belongsTo(User, { foreignKey: 'senderId' });
+
  Job.hasMany(Message, { foreignKey: 'jobId' });
  Message.belongsTo(Job, { foreignKey: 'jobId' });
 

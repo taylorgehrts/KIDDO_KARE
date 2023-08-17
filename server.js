@@ -77,9 +77,10 @@ sequelize.sync({ force: true }).then(() => {
     })
 
     socket.on('message', data => {
-      io.to(`${data.jobId}`).emit('message', { userName: data.userName, 
-                                               msg: data.message
-                                             });
+      io.to(`${data.jobId}`).emit('message', { 
+        userName: data.userName, 
+        msg: data.message
+      });
     });
   });
 });

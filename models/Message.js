@@ -2,6 +2,7 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
 const Job = require('./Job');
+const User = require('./User');
 
 class Message extends Model {}
 
@@ -16,6 +17,13 @@ Message.init({
     body: {
         type: DataTypes.TEXT,
         allowNull: false
+    },
+    senderId: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: User,
+            key: 'id'
+        }
     },
     jobId: {
         type: DataTypes.INTEGER,
