@@ -8,7 +8,7 @@ const interestSitterClickHandler = async event => {
         headers: { 'Content-Type': 'application/json'}
     });
 
-    // location.reload();
+    location.reload();
 };
 
 document.getElementById('interest-sitter').addEventListener('click', interestSitterClickHandler);
