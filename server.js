@@ -83,6 +83,7 @@ sequelize.sync({ force: true }).then(() => {
           userName: data.userName
         }
       })).id;
+      
       await Message.create({
         body: data.message,
         senderId: userId,
