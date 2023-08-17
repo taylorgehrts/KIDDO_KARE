@@ -1,0 +1,32 @@
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>
+                Jobs for {{userName}}
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="d-grid gap-2">
+                {{#if activeJobId}}
+                    <h2>
+                        Active Job
+                    </h2>
+                    <a href="/job/{{activeJobId}}" class="btn btn-primary btn-lg btn-block">{{activeJobDescription}}</a>
+                {{/if}}
+            </div>
+
+            <div class="d-grid gap-2">
+                <h2>
+                    Interested In
+                </h2>
+
+                {{#each jobsInterestedIn as |job|}}
+                    <a href="/job/{{job.id}}" class="btn btn-primary btn-lg btn-block">{{job.description}}</a>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>
