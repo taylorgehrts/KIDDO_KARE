@@ -4,6 +4,7 @@ const SitterInfo = require('./SitterInfo');
 const ChildInfo = require('./ChildInfo')
 const Job = require('./Job');
 const SitterInterests = require('./SitterInterests');
+const Message = require('./Message');
 
 User.hasOne(ParentInfo, { foreignKey: 'userId' });
 ParentInfo.belongsTo(User, { foreignKey: 'userId' });
@@ -33,6 +34,9 @@ Job.belongsToMany(SitterInfo, {
     foreignKey: 'jobId',
     as: 'interestedSitters'
  });
+
+ Job.hasMany(Message, { foreignKey: 'jobId' });
+ Message.belongsTo(Job, { foreignKey: 'jobId' });
 
 module.exports = {
     User, ParentInfo, SitterInfo, ChildInfo,
