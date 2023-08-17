@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const { getChildren, getInterestedSitters } = require('../../models/lib/get');
-const { Job, SitterInfo } = require('../../models');
+const { Job, User } = require('../../models');
 
 router.get('/:id', async (req, res) => {
     const jobId = req.params.id;
@@ -37,7 +37,7 @@ router.get('/:id', async (req, res) => {
                         loggedIn,
                         userId: req.session.userId, 
                         acceptedUserId, acceptedUserName, jobOwnerId,
-                        userName: user.userName
+                        userName: (await User.findByPk(req.session.userId)).userName
                     });
 });
 

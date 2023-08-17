@@ -1,11 +1,13 @@
 const socket = io();
 
-socket.emit('join', `${jobId}`);
+const chatJobId = document.getElementById('job-id').dataset.id;
+
+socket.emit('join', `${chatJobId}`);
 
 const chatFormSubmitHandler = event => {
     event.preventDefault();
 
-    const jobId = document.getElementById('job-id').dataset.id;
+    
     const userName = document.getElementById('user-name').dataset.name;
     const messageBox = document.getElementById('chat-box');
     const message = messageBox.value;
@@ -16,7 +18,7 @@ const chatFormSubmitHandler = event => {
         socket.emit(`message`, {
             message,
             userName,
-            jobId
+            jobId: chatJobId
         });
         messageBox.value = '';
     }
@@ -29,7 +31,7 @@ const chatWindow = document.getElementById('chat-window');
 
 // Poulate chatWindow with message history
 
-fetch(`/api/messages/${jobId}`).then(response => {
+fetch(`/api/messages/${chatJobId}`).then(response => {
     response.json().then(data => {
         for (msg of data) {
             const msgDiv = document.createElement('div');
