@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { authParent } = require('../../utils/utils');
+const { authParent, authSitter } = require('../../utils/utils');
 
 const { User } = require('../../models')
 
@@ -32,7 +32,11 @@ router.get('/:userId', authParent, async (req, res) => {
 });
 
 router.get('/sitter/:userId', authSitter, async (req, res) => {
+    const userName = (await User.findByPk(req.session.userId)).userName;
 
+    res.render('sitterMyJobs', {
+        userName
+    });
 });
 
 module.exports = router;
