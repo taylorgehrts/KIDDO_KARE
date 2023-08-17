@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 const { authParent, authSitter } = require('../../utils/utils');
+const { getJobsInterestedIn } = require('../../models/lib/get');
 
 const { User } = require('../../models')
 
@@ -34,14 +35,16 @@ router.get('/:userId', authParent, async (req, res) => {
 router.get('/sitter/:userId', authSitter, async (req, res) => {
     const user = await User.findByPk(req.session.userId);
     const activeJob = (await (await user.getSitterInfo()).getWorker())[0];
-    console.log(activeJob)
+    const jobsInterestedIn = await getJobsInterestedIn(req.session.userId);
+
 
     res.render('sitterMyJobs', {
         loggedIn: req.session.loggedIn,
         isSitter: req.session.isSitter,
         userName: user.userName,
         activeJobId: activeJob ? activeJob.id : null,
-        activeJobDescription: activeJob ? activeJob.description : null
+        activeJobDescription: activeJob ? activeJob.description : null,
+        jobsInterestedIn
     });
 });
 
