@@ -10,10 +10,12 @@
     <div class="row">
         <div class="col-md-6">
             <div class="d-grid gap-2">
-                <h2>
-                    Active Job
-                </h2>
-                <a href="/job/{{activeJobId}}" class="btn btn-primary btn-lg btn-block">{{activeJobDescription}}</a>
+                {{#if activeJobId}}
+                    <h2>
+                        Active Job
+                    </h2>
+                    <a href="/job/{{activeJobId}}" class="btn btn-primary btn-lg btn-block">{{activeJobDescription}}</a>
+                {{/if}}
             </div>
 
             <div class="d-grid gap-2">

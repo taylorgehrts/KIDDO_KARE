@@ -32,10 +32,16 @@ router.get('/:userId', authParent, async (req, res) => {
 });
 
 router.get('/sitter/:userId', authSitter, async (req, res) => {
-    const userName = (await User.findByPk(req.session.userId)).userName;
+    const user = await User.findByPk(req.session.userId);
+    const activeJob = (await (await user.getSitterInfo()).getWorker())[0];
+    console.log(activeJob)
 
     res.render('sitterMyJobs', {
-        userName
+        loggedIn: req.session.loggedIn,
+        isSitter: req.session.isSitter,
+        userName: user.userName,
+        activeJobId: activeJob ? activeJob.id : null,
+        activeJobDescription: activeJob ? activeJob.description : null
     });
 });
 
