@@ -31,4 +31,8 @@ router.get('/:userId', authParent, async (req, res) => {
     }
 });
 
+router.get('/sitter/:userId', authSitter, async (req, res) => {
+
+});
+
 module.exports = router;
