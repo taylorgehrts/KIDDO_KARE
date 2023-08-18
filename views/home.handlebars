@@ -1,3 +1,4 @@
+
 {{!-- This is the homepage --}}
 <head>
     <meta charset="UTF-8">
@@ -15,28 +16,46 @@
         .image-section img {
             max-width: 30%; /* Adjust the width of the images */
         }
-      /*  .links-section {
+        /* background image with custom css applied to it */
+        body{
+            background-image: url("/images/child-care.png");
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        .{
+            background-color: rgba(0,0,0,.5);
+            color: #fff;
+            
+
+        }
+       /* .links-section {
             margin-top: 20px;
         }
          Add more custom styles as needed */
     </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to the Babysitting App!</h1>
-    </header>
+
     
     <main>
+        <div class="container">
         <div class="hero position-relative d-flex justify-content-center align-items-center text-center">
-    <div class="overlay-card bg-light p-4 rounded">    <div class="overlay-card bg-light p-4 rounded">
-      <h2 class="card-title">Welcome to Kiddo Kare</h2>
+    <div class="overlay-card bg-light p-4 rounded opacity-100">    <div class="overlay-card bg-light p-4 rounded">
+      <h2 class="card-title ">Welcome to Kiddo Kare</h2>
       <p class="card-text">Kiddo Kare is a babysitting app that connects parents with trusted babysitters. Whether you're a parent looking for reliable childcare or a babysitter looking for job opportunities, Kiddo Kare has you covered.</p>
       <a href="/login" class="btn btn-primary">Get Started</a>
     </div>
-  </div>
-        <section class="image-section">
-            <img src="/images/building_blocks.png" alt="Building Blocks">
-            <img src="/images/child_care.png" alt="Child Care">
+    </div>
+     </div>
+
+       
+        <section class="image-section"> 
+            {{!-- <img src="/images/baby-clap.png" alt="Building Blocks">
+            <img class="align-left" src="/images/baby.png" alt="Child Care">
+             --}}
             <!-- Add more images here if needed -->
         </section>
         
