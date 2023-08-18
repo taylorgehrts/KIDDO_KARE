@@ -1,0 +1,29 @@
+<div class="container my-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="mb-4">Sitter Profile</h1>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <h2>User Name</h2>
+                <p>{{user.userName}}</p>
+                
+                <h2>Name</h2>
+                <p>{{user.firstName}} {{user.lastName}}</p>
+                
+                <h2>Bio</h2>
+                <p>{{user.bio}}</p>
+                
+                <h3>Years Experience</h3>
+                <p>{{sitter.yearsExperience}}</p>
+                
+                <h3>Qualifications</h3>
+                <p>{{sitter.qualifications}}</p>
+            </div>
+            <div class="mt-4">
+                <a href="/edit" class="btn btn-primary">Edit Profile</a>
+            </div>
+        </div>
+    </div>

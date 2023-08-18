@@ -1,0 +1,13 @@
+<div id="chat-window">
+    <!-- Chat messages populate here -->
+</div>
+<form name="chat-form" id="chat-form">
+    <textarea name="chat-box" id="chat-box" cols="30" rows="1"></textarea>
+    <button type="submit">Send</button>
+</form>
+
+<div id="page-user" data-id="{{pageUser}}"></div>
+<div id="logged-in-user" data-id="{{loggedInUser}}"></div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/chat.js"></script>

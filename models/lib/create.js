@@ -4,6 +4,7 @@ const ParentInfo = require('../ParentInfo');
 const SitterInfo = require('../SitterInfo');
 const SitterInterests = require('../SitterInterests');
 const User = require('../User');
+const { convertJobDatesStore } = require('../../utils/utils');
 
 const createUser = async (userData, isSitter, sitterOrParentData, childData = null) => {
     const userResult = await User.create(userData);
@@ -12,7 +13,7 @@ const createUser = async (userData, isSitter, sitterOrParentData, childData = nu
 
     if (isSitter) {
         let sitterResult = await SitterInfo.create({ userId: userId, ...sitterOrParentData });
-        result = { user: { ...userResult.toJSON() }, sitterInfo: { ...sitterResult.toJSON() } };
+        result = { user: { ...(userResult.toJSON()) }, sitterInfo: { ...sitterResult.toJSON() } };
     } else {
         const parentResult = await ParentInfo.create({ userId: userId, ...sitterOrParentData });
         const parentId = parentResult.id;
@@ -36,20 +37,33 @@ const createUser = async (userData, isSitter, sitterOrParentData, childData = nu
     return result;
 };
 
-const convertJobDatesStore = job => {
-    const newData = Object.create(job);
+const createJob = async (userId, jobData) => {
+    const parentId = (await (await User.findByPk(userId)).getParentInfo()).id;
 
-    newData.startTime = job.startTime.toISOString();
-    newData.endTime = job.endTime.toISOString();
+    console.log(parentId)
 
-    return newData;
-}
+    const result = Array.isArray(jobData) ? await Job.bulkCreate(jobData.map(job => ({ ...convertJobDatesStore(job), parentId })))
+        : await Job.create(({ ...convertJobDatesStore(jobData), parentId}));
 
-const createJob = async (jobData) => {
-    return Array.isArray(jobData) ? await Job.bulkCreate(jobData.map(job => convertJobDatesStore(job)))
-        : await Job.create(convertJobDatesStore(jobData));
+    console.log(result);
+
+    return result;
+};
+
+const interestSitter = async (userId, jobId) => {
+    return await SitterInterests.create({
+        sitterId: (await (await User.findByPk(userId)).getSitterInfo()).id,
+        jobId: jobId
+    });
+};
+
+const addChild = async (userId, childData) => {
+    const parentId = (await (await User.findByPk(userId)).getParentInfo()).id;
+
+    return await ChildInfo.create({...childData, parentId});
 };
 
 module.exports = {
-    createUser, createJob
+    createUser, createJob,
+    interestSitter, addChild
 }

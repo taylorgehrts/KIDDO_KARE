@@ -1,7 +1,9 @@
 const router = require('express').Router();
 
 const { createUser } = require('../../models/lib/create');
+const { auth, checkUser } = require('../../utils/utils');
 const User = require('../../models/User');
+const { SitterInfo } = require('../../models');
 
 // Create a user and log them in
 router.post('/', async (req, res) => {
@@ -27,7 +29,9 @@ router.post('/', async (req, res) => {
         }
     } else {
         // TODO decide what goes in ParentInfo (if anything) and serialize it here
-        sitterOrParentData = {};
+        sitterOrParentData = {
+            bedTime: data.bedTime
+        };
 
         childData = data.childData;
     }
@@ -38,10 +42,12 @@ router.post('/', async (req, res) => {
         req.session.save(() => {
             req.session.userId = result.user.id;
             req.session.loggedIn = true;
+            req.session.isSitter = isSitter;
 
             res.status(200).json({ message: 'POST /api/users successful! Logged in!', data: result});
         });
     } catch (err) {
+        console.error(err);
         res.status(500).json(err);
     }
 });
@@ -62,10 +68,13 @@ router.post('/login', async (req, res) => {
         return res.status(400).json({ message: "Incorrect username or password" });
     }
 
+    const isSitter = (await user.getSitterInfo()) ? true : false;
+
     if (user.comparePasswordHash(clearTextPassword)) {
         req.session.save(() => {
             req.session.userId = user.id;
             req.session.loggedIn = true;
+            req.session.isSitter = isSitter;
 
             res.status(200).json({ message: 'Logged in!' });
         });
@@ -79,6 +88,43 @@ router.post('/logout', (req, res) => {
         req.session.destroy(() => res.status(204).json({ message: "Logged out!" }));
     } else {
         res.status(404).end();
+    }
+});
+
+router.put('/:id', auth, async (req, res) => {
+    const userData = {};
+    const sitterData = {};
+    const body = req.body;
+    const userId = req.params.id;
+    let result;
+
+    try {
+        // Disallow users editing other user's profile
+        if (!checkUser(userId, req.session.userId)) {
+            return res.status(401).end();
+        }
+        // Update user part
+        if (body.userName) userData.userName = body.userName;
+        if (body.firstName) userData.firstName = body.firstName;
+        if (body.lastName) userData.lastName = body.lastName;
+        if (body.address) userData.address = body.address;
+        if (body.bio) userData.bio = body.bio;
+
+        result = await User.update(userData, { where: { id: userId } });
+
+        if (req.query.isSitter === 'true') {
+            // Update sitter part if needed
+            const sitterId = (await (await User.findByPk(userId)).getSitterInfo()).id;
+
+            if (body.yearsExperience) sitterData.yearsExperience = body.yearsExperience;
+            if (body.qualifications) sitterData.qualifications = body.qualifications;
+
+            result.sitter = await SitterInfo.update(sitterData, { where: { id: sitterId } });
+        }
+
+        res.status(200).json({ ok: true, result });
+    } catch (err) {
+        res.status(500).json(err);
     }
 });
 

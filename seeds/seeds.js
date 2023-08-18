@@ -1,3 +1,5 @@
+const { createJob, createUser } = require('../models/lib/create');
+
 const seedData = [
     {
         userData: {
@@ -16,15 +18,7 @@ const seedData = [
             qualifications: "CPR Training"
 
             
-        },
-        jobData: [
-            {
-                description: 'Looking for a babysitter for my two kids.',
-                startTime: new Date('2023-08-07T08:00:00Z'),
-                endTime: new Date('2023-08-07T12:00:00Z'),
-                
-            },
-        ],
+        }
     },
     {
         userData: {
@@ -43,15 +37,26 @@ const seedData = [
         },
         childData: [
             {
-                firstName: 'Alex',
-                lastName: 'Jorgenson',
+                name: 'Alex',
                 age: 7,
             },
             {
-                firstName: 'Ella',
-                lastName: 'Jorgenson',
+                name: 'Ella',
                 age: 4,
             },
+        ],
+        jobData: [
+            {
+                description: 'Looking for a babysitter for my two kids.',
+                startTime: new Date('2023-08-20T08:00:00Z'),
+                endTime: new Date('2023-08-22T12:00:00Z'),
+                
+            },
+            {
+                description: "test1",
+                startTime: new Date('2023-08-11'),
+                endTime: new Date('2023-08-12')
+            }
         ],
     },
  
@@ -70,13 +75,11 @@ const seedAll = async () => {
 
             const userResult = await createUser(userData, isSitter, sitterOrParentData, childData);
 
+            const userId = userResult.user.id;
+
             if (jobData && jobData.length > 0) {
                 let jobs;
-                if (isSitter) {
-                    jobs = await createJob(jobData, null, userResult.userId); // Use userId for workerId
-                } else {
-                    jobs = await createJob(jobData, userResult.userId, null); // Use userId for parentId
-                }
+                jobs = await createJob(userId, jobData); 
                 userResult.jobs = jobs.map(job => job.toJSON());
             }
 
@@ -87,4 +90,4 @@ const seedAll = async () => {
     }
 };
 
-seedAll();
+module.exports = seedAll;
