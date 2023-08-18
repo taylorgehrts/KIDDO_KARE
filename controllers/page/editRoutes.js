@@ -26,10 +26,10 @@ router.get('/', auth, async (req, res) => {
     } else {
         isSitter = true;
     }
-
+    const userName = user.userName;
     res.render('edit', {
         userId,
-        user,
+        userName,
         isSitter,
         loggedIn,
         info

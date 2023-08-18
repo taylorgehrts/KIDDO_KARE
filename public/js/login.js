@@ -52,6 +52,8 @@ const parseChildren = (agesStr, namesStr) => {
 }
 
 createAccountForm.addEventListener('submit', async event => {
+    event.preventDefault();
+
     // All users
     const userName = document.getElementById('username-signup').value;
     const email = document.getElementById('email').value;
@@ -102,4 +104,6 @@ createAccountForm.addEventListener('submit', async event => {
     } else {
         alert('There was an error');
     }
+
+    window.location.href = '/';
 });

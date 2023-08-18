@@ -1,7 +1,7 @@
 const interestSitterClickHandler = async event => {
     event.preventDefault();
 
-    const query = `?jobId=${document.getElementById('user-id').dataset.id}`;
+    const query = `?jobId=${document.getElementById('job-id').dataset.id}`;
 
     await fetch(`/api/sitters/interest${query}`, {
         method: 'POST',

@@ -11,6 +11,13 @@
                     {{/if}}
 
                     <div class="mt-4">
+                        <h2>Start:</h2>
+                        <p>{{job.startTime}}</p>
+                        <h2>End:</h2>
+                        <p>{{job.endTime}}</p>
+                    </div>
+
+                    <div class="mt-4">
                         <h2>Description</h2>
                         <p>{{job.description}}</p>
                     </div>
@@ -28,7 +35,7 @@
                     {{#if isSitter}}
                     <div class="mt-4">
                         <button id="interest-sitter" class="btn btn-primary">Apply</button>
-                        <div id="user-id" data-id="{{userId}}"></div>
+                        <div id="job-id" data-id="{{job.id}}"></div>
                         <script defer src="/js/jobForSitter.js"></script>
                     </div>
                     {{/if}}
@@ -47,7 +54,7 @@
                                 <a href="/sitter/{{sitter.id}}">{{sitter.userName}}</a>
                                 {{#if ../loggedIn}}
                                     {{#isJobOwner ../userId ../jobOwnerId}}
-                                        <button class="accept-sitter btn btn-primary" data-sitter-id="{{sitter.id}}">Accept</button>
+                                        <button class="accept-sitter btn btn-primary" data-sitter-id="{{sitter.sitterId}}">Accept</button>
                                     {{else}}
                                     {{/isJobOwner}}
                                 {{/if}}
