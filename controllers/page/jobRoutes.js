@@ -28,10 +28,10 @@ router.get('/:id', async (req, res) => {
     let acceptedUserId;
     let acceptedUserName;
     if (acceptedUser) {
-        acceptedUserId = acceptedUser.id;
+        acceptedUserId = (await acceptedUser.getUser()).id;
         acceptedUserName = await (await acceptedUser.getUser()).userName;
     }
-    console.log(acceptedUserId, acceptedUserName);
+    console.log(req.session.userId, acceptedUserId);
     res.render('job', { job: jobJson, children, interestedSitters,
                         isSitter: req.session.isSitter,
                         loggedIn,
