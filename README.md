@@ -28,6 +28,7 @@ The application leverages the following technologies:
 
 ## Installation
 To access the application, please visit: [Kiddo Kare Babysitting App](https://hidden-eyrie-72629-9ca91495354a.herokuapp.com/)
+![Screenshot](./public/images/Screenshot%202023-08-18%20at%209.47.16%20AM.png)
 
 ## Usage
 Whether you are a parent or a sitter, the application offers distinct features:
